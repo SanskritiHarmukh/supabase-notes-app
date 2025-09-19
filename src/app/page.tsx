@@ -9,7 +9,13 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function NotesApp() {
-  const [notes, setNotes] = useState<any[]>([]);
+    type Note = {
+    id: string;
+    title: string;
+    content: string;
+    created_at: string;
+  };
+  const [notes, setNotes] = useState<Note[]>([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,7 +40,7 @@ export default function NotesApp() {
     if (!title.trim()) return;
     setLoading(true);
 
-    const { error } = await supabase.from("notes").insert([{ title, content }]);
+    const { data, error } = await supabase.from("notes").insert([{ title, content }]);
     if (error) console.error("Insert error:", error);
     else {
       setTitle("");
@@ -46,12 +52,12 @@ export default function NotesApp() {
   };
 
   const deleteNote = async (id: string) => {
-    const { error } = await supabase.from("notes").delete().eq("id", id);
+    const { data, error } = await supabase.from("notes").delete().eq("id", id);
     if (error) console.error("Delete error:", error);
     else fetchNotes();
   };
 
-  const startEdit = (note: any) => {
+  const startEdit = (note: Note) => {
     setEditingId(note.id);
     setEditTitle(note.title);
     setEditContent(note.content);
@@ -66,7 +72,7 @@ export default function NotesApp() {
   const saveEdit = async () => {
     if (!editingId) return;
 
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("notes")
       .update({ title: editTitle, content: editContent })
       .eq("id", editingId);
