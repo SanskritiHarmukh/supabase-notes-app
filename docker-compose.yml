@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  notes-app:
+    build: .
+    container_name: notes-app
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - notes-network
+
+networks:
+  notes-network:
+    driver: bridge
