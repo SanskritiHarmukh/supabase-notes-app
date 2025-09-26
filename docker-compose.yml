@@ -12,9 +12,3 @@ services:
     ports:
       - "3000:3000"
     restart: unless-stopped
-    networks:
-      - notes-network
-
-networks:
-  notes-network:
-    driver: bridge
