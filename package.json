@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "start:prod": "next build && next start -p 3000"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
