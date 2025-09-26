@@ -7,4 +7,3 @@ Dockerfile
 docker-compose.yml
 *.md
 .gitignore
-.env
