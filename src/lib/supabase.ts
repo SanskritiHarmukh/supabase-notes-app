@@ -1,9 +1,6 @@
-import { createClient } from "@supabase/supabase-js";
-import getConfig from "next/config";
+import { createClient } from "@supabase/supabase-js"
 
-const { publicRuntimeConfig } = getConfig();
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
-export const supabase = createClient(
-  publicRuntimeConfig.supabaseUrl,
-  publicRuntimeConfig.supabaseAnonKey
-);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
