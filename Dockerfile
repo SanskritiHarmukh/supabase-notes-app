@@ -1,4 +1,4 @@
-FROM node:18-alpine3.19
+FROM node:20-alpine3.20
 
 WORKDIR /app
 
@@ -11,8 +11,11 @@ RUN npm ci
 # Copy source code
 COPY . .
 
+# Build the Next.js app at image build time
+RUN npm run build
+
 # Expose port
 EXPOSE 3000
 
-# Start the app (build happens at runtime, reads .env via Docker Compose)
+# Start the app
 CMD ["npm", "run", "start:prod"]
