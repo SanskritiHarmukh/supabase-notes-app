@@ -1,11 +1,15 @@
 services:
   notes-app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: notes-app
     ports:
       - "3000:3000"
-    env_file:
-      - .env
+    environment:
+      NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      NODE_ENV: production
     restart: unless-stopped
     networks:
       - notes-network
