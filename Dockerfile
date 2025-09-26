@@ -11,8 +11,11 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Expose port 3000
+# Build the Next.js application 
+RUN npm run build 
+
+# Expose port 3000 
 EXPOSE 3000
 
 # Start the application (build happens at runtime)
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "start"]
