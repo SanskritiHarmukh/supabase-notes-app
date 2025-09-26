@@ -1,5 +1,5 @@
 services:
-  web:
+  notes-app:
     build:
       context: .
       dockerfile: Dockerfile
