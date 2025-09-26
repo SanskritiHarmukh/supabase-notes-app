@@ -1,14 +1,16 @@
+version: "3.9"
 services:
   notes-app:
     build: .
     container_name: notes-app
     ports:
       - "3000:3000"
-    env_file:
-      - .env
     restart: unless-stopped
     networks:
       - notes-network
+    volumes:
+      - ./supabase-notes-app/.env:/app/.env
+
 networks:
   notes-network:
     driver: bridge
