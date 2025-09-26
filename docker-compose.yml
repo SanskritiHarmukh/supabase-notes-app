@@ -1,5 +1,6 @@
 services:
   notes-app:
+    container_name: notes-app
     build:
       context: .
       dockerfile: Dockerfile
