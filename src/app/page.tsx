@@ -40,7 +40,7 @@ export default function NotesApp() {
     if (!title.trim()) return;
     setLoading(true);
 
-    const { data, error } = await supabase.from("notes").insert([{ title, content }]);
+    const { error } = await supabase.from("notes").insert([{ title, content }]);
     if (error) console.error("Insert error:", error);
     else {
       setTitle("");
@@ -52,7 +52,7 @@ export default function NotesApp() {
   };
 
   const deleteNote = async (id: string) => {
-    const { data, error } = await supabase.from("notes").delete().eq("id", id);
+    const { error } = await supabase.from("notes").delete().eq("id", id);
     if (error) console.error("Delete error:", error);
     else fetchNotes();
   };
@@ -72,7 +72,7 @@ export default function NotesApp() {
   const saveEdit = async () => {
     if (!editingId) return;
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("notes")
       .update({ title: editTitle, content: editContent })
       .eq("id", editingId);
